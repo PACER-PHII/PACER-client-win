@@ -12,11 +12,11 @@ https://blog.foldersecurityviewer.com/how-to-install-docker-and-run-docker-conta
 Go to https://www.postgresql.org/download/windows/ and download the installer to install
 PostgreSQL database. 
 
-Once the PostgreSQL is installed, launch paAdmin 4 from windows start section. This is GUI management
-tool for PostgreSQL. On the left panel, right click on PostgreSQL 14 icon to create a new database called "ecr".
+1. Once the PostgreSQL is installed, launch paAdmin 4 from windows start section. This is GUI management
+tool for PostgreSQL. 
+2. On the left panel, right click on PostgreSQL 14 icon to create a new database called "ecr".
 Then, right click on the "ecr" database and create a schema called "ecr". 
-
-As a default setting, the windows server 2019 has a local firewall turned on. We need to add a
+3. As a default setting, the windows server 2019 has a local firewall turned on. We need to add a
 inbound rule for the postgreSQL server port. Use Server Manager dashboard and run Windows Defender Firewall
 from Tool menu.
 
