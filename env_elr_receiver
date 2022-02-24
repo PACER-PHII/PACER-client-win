@@ -1,0 +1,3 @@
+ECR_URL=http://yellowisland01.icl.gtri.org:8085/ecr-manager/ECR
+PARSER_MODE=ECR
+TRANSPORT_MODE=MLLP
