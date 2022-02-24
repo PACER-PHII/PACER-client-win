@@ -50,14 +50,14 @@ to install OpenJDK. After installation, type java --version to verify its instal
 
 ## PACER-client deployment
 1. Run “Start-Service Docker” if you haven’t started docker
-2. Create a network within docker. 
-   Run "docker network ls" to see if you already have a network called "pacer". 
-   If it does not exist, run the following to create "pacer" network
-	docker network create --driver nat pacer
+2. Create a network within docker. <br/>
+   Run "docker network ls" to see if you already have a network called "pacer". <br/>
+   If it does not exist, run the following to create "pacer" network <br/>
+   docker network create --driver nat pacer
 
 ### pacer-index-api service deployment
-1. docker pull artifactory.icl.gtri.org:443/pacer-platform/pacer_index_api
-2. docker run --name pacer_index_api -p 8086:8080 --env-file env_pacer_index_api --network pacer -d artifactory.icl.gtri.org:443/pacer-platform/pacer_index_api:latest
+1. docker pull artifactory.icl.gtri.org:443/pacer-platform/pacer_index_api <br/>
+2. docker run --name pacer_index_api -p 8086:8080 --env-file env_pacer_index_api --network pacer -d artifactory.icl.gtri.org:443/pacer-platform/pacer_index_api:latest <br/>
 From Chome browser, go to "http://localhost:8086/pacer-index-api/1.0.0/" And, use manage-api-controller to add
 the following entry. Use POST option. Username and Password are specified in "env_packer_index_api" file.
 
