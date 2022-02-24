@@ -1,5 +1,16 @@
 # PACER-client Windows Server 2019 Installation
 
+```
+All the instruction written in here require an account setup at GTRI in order to pull the container images. 
+If your health department wants to participate and set up the PACER, please contact us.
+```
+
+Contact:<br/>
+* Branch Head: Tia Pope (tia.pope@gtri.gatech.edu)<br/>
+* Tech Lead: Myung Choi (myung.choi@gtri.gatech.edu)<br/>
+* Project Manager: Jordan Chandler (Jordan.Chandler@gtri.gatech.edu)
+
+
 ## Preparation: 
 PACER-client uses Docker to deploy some of its components. 
 You need to install Docker for Windows. Please refer to the following
