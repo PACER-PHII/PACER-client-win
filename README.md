@@ -16,7 +16,7 @@ PACER-client uses Docker to deploy some of its components.
 You need to install Docker for Windows. Please refer to the following
 two linkx for more information about the Docker installation for Windows
 
-https://blog.sixeyed.com/getting-started-with-docker-on-windows-server-2019/
+https://blog.sixeyed.com/getting-started-with-docker-on-windows-server-2019/<br/>
 https://blog.foldersecurityviewer.com/how-to-install-docker-and-run-docker-containers-on-windows-server-2019/
 
 ### PostgreSQL database installation.
@@ -36,7 +36,9 @@ C:\Program Files\PostgreSQL\14\data\pg_hba.conf
 
 Under IPv4 local connections section, add a new entry as follow,
 
-```host    all             all             xxx.xxx.xxx.xxx/32            scram-sha-256```
+```
+host    all             all             xxx.xxx.xxx.xxx/32            scram-sha-256
+```
 
 xxx.xxx.xxx.xxx is your IP address of Windows Server 2019 VM.
 
@@ -59,6 +61,7 @@ to install OpenJDK. After installation, type java --version to verify its instal
 From Chome browser, go to "http://localhost:8086/pacer-index-api/1.0.0/" And, use manage-api-controller to add
 the following entry. Use POST option. Username and Password are specified in "env_packer_index_api" file.
 
+```
  {
    "providerName":"John Duke",
    "identifier":"ORDPROVIDER|P49430",
@@ -67,13 +70,14 @@ the following entry. Use POST option. Username and Password are specified in "en
       "serverUrl":"http://musctest.hdap.gatech.edu:8082/JobManagementSystem/List",
       "security":{
          "type":"basic",
-         "username":"username",
-         "password":"password"
+         "username":"xxx",
+         "password":"xxx"
       },
       "version":"1.0.0",
       "type":"ECR"
    }
 }
+```
 
 ### elr_receiver deployment
 1. docker pull artifactory.icl.gtri.org/pacer-platform/elr_receiver
@@ -95,10 +99,12 @@ Run the follows to make the PACER-client to talk to PACER-server in the GTRI san
 
 You should see the following message.
 
-```SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+```
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 Received response:
 MSA|AA|20070701132554000008le|20220224110058.233-0500||ACK^R01^ACK|1|P|2.5.1
-End of response message```
+End of response message
+```
 
