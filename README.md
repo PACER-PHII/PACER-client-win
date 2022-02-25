@@ -59,7 +59,8 @@ to install OpenJDK. After installation, type java --version to verify its instal
 1. docker pull artifactory.icl.gtri.org:443/pacer-platform/pacer_index_api <br/>
 2. docker run --name pacer_index_api -p 8086:8080 --env-file env_pacer_index_api --network pacer -d artifactory.icl.gtri.org:443/pacer-platform/pacer_index_api:latest <br/>
 From Chome browser, go to "http://localhost:8086/pacer-index-api/1.0.0/" And, use manage-api-controller to add
-the following entry. Use POST option. Username and Password are specified in "env_packer_index_api" file.
+the following entry. Use POST option. Username and Password are specified in "env_packer_index_api" file. 
+Please replace xxx with username/password that will be provided from PACER-server.
 
 ```
  {
