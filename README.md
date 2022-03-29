@@ -25,17 +25,17 @@ There are three folders. Those are the components for PACER client. The componen
    - ecr-manager
    - elr-receiver
 
-In each foler, there is an xml file. Open the XML file and make necessary changes for the environment variables. After all the environment variables are set correctly, run the executable as follow,
+In each foler, there is an xml file. Open the XML file and make necessary changes for the environment variables. After all the environment variables are set correctly, run the executable file. See below for pacer-index-api.exe example,
 
 ```
 >> .\pacer-index-api.exe install
 ```
-This will install the pacer-index-api as a service. Open service manager (do windows search for services). From the list of services, locate the PACER Index API service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. This is critical for ECR Manager as it will use this account to talk to PACER server.
+This will install the pacer-index-api as a service. Then, open services application (built-in app in Windows). From the list of services, locate the PACER Index API service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password.
 
-Do the rest of components.
+Repeat this for ecr-manager and elr-receiver. This is critical for the ecr-manager as the ecr-manager will use this account to talk to MS SQL server with windows authentication mode.
 
 ### pacer-index-api service deployment
-We need to populate the PACER index information for this app. From Chome browser, go to "http://localhost:8086/pacer-index-api/1.0.0/" And, use manage-api-controller to add the following entry. Use POST option. Username and Password are specified in "<component_name>.xml" files. 
+We need to populate the PACER index information for ECR Manager. From a Chome browser, go to "http://localhost:8086/pacer-index-api/1.0.0/" And, use manage-api-controller to add the following entry. Use POST option. 
 
 ```
  {
@@ -46,8 +46,8 @@ We need to populate the PACER index information for this app. From Chome browser
       "serverUrl":"http://musctest.hdap.gatech.edu:8082/JobManagementSystem/List",
       "security":{
          "type":"basic",
-         "username":"<username of list manager in Hous>",
-         "password":"<password>"
+         "username":"<username of list manager in the PACER server>",
+         "password":"<password of list manager in the PACER server>>"
       },
       "version":"1.0.0",
       "type":"ECR"
