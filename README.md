@@ -1,66 +1,41 @@
 # PACER-client Windows Server 2019 Installation
 
-```
-All the instruction written in here require an account setup at GTRI in order to pull the container images. 
-If your health department wants to participate and set up the PACER, please contact us.
-```
-
 Contact:<br/>
 * Branch Head: Tia Pope (tia.pope@gtri.gatech.edu)<br/>
 * Tech Lead: Myung Choi (myung.choi@gtri.gatech.edu)<br/>
 * Project Manager: Jordan Chandler (Jordan.Chandler@gtri.gatech.edu)
 
-
 ## Preparation: 
-PACER-client uses Docker to deploy some of its components. 
-You need to install Docker for Windows. Please refer to the following
-two linkx for more information about the Docker installation for Windows
+PACER-client uses a wrapper to run the Java application as a window service. Windows Service Wrapper (WinSW) is used for the wrapper.exe. For more information about the WinSW, please refer to https://github.com/winsw/winsw
 
-https://blog.sixeyed.com/getting-started-with-docker-on-windows-server-2019/<br/>
-https://blog.foldersecurityviewer.com/how-to-install-docker-and-run-docker-containers-on-windows-server-2019/
+### MS Sql Server Database.
+Any relational database can be used. If you prefer another database such as PostgreSQL, refer to https://www.postgresql.org/download/windows/ and download the installer to install PostgreSQL database. 
 
-### PostgreSQL database installation.
-Go to https://www.postgresql.org/download/windows/ and download the installer to install
-PostgreSQL database. 
+ECR Manager needs to have a database to persist ECR data from electronic lab reports and EHR data. Whether you use MS SQL or PostgreSQL, "ecr" must be used for the name of **database** and **schema**. Tables will automatically be created. 
 
-1. Once the PostgreSQL is installed, launch paAdmin 4 from windows start section. This is GUI management
-tool for PostgreSQL. 
-2. On the left panel, right click on PostgreSQL 14 icon to create a new database called "ecr".
-Then, right click on the "ecr" database and create a schema called "ecr". 
-3. As a default setting, the windows server 2019 has a local firewall turned on. We need to add a
-inbound rule for the postgreSQL server port. Use Server Manager dashboard and run Windows Defender Firewall
-from Tool menu.
-
-The PostgreSQL server itself listens to local traffic. So, go to the following file and add entry for host.
-C:\Program Files\PostgreSQL\14\data\pg_hba.conf
-
-Under IPv4 local connections section, add a new entry as follow,
-
-```
-host    all             all             xxx.xxx.xxx.xxx/32            scram-sha-256
-```
-
-xxx.xxx.xxx.xxx is your IP address of Windows Server 2019 VM.
-
-After you save and exit this file, please restart the PostgreSQL service from services.
+In order to use Windows Authentication for MS SQL, make sure "ecr" database has the account that PACER-client will be running under as a db writer/reader/owner. Please note that the schema name also needs to be "ecr"
 
 ### OpenJDK installation.
 Go to https://docs.microsoft.com/en-us/java/openjdk/download and download OpenJDK17 msi file
 to install OpenJDK. After installation, type java --version to verify its installation
 
 ## PACER-client deployment
-1. Run “Start-Service Docker” if you haven’t started docker
-2. Create a network within docker. <br/>
-   Run "docker network ls" to see if you already have a network called "pacer". <br/>
-   If it does not exist, run the following to create "pacer" network <br/>
-   docker network create --driver nat pacer
+There are three folders. Those are the components for PACER client. The components must be deployed in the following order
+   - pacer-index-api
+   - ecr-manager
+   - elr-receiver
+
+In each foler, there is an xml file. Open the XML file and make necessary changes for the environment variables. After all the environment variables are set correctly, run the executable as follow,
+
+```
+>> .\pacer-index-api.exe install
+```
+This will install the pacer-index-api as a service. Open service manager (do windows search for services). From the list of services, locate the PACER Index API service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. This is critical for ECR Manager as it will use this account to talk to PACER server.
+
+Do the rest of components.
 
 ### pacer-index-api service deployment
-1. docker pull artifactory.icl.gtri.org:443/pacer-platform/pacer_index_api <br/>
-2. docker run --name pacer_index_api -p 8086:8080 --env-file env_pacer_index_api --network pacer -d artifactory.icl.gtri.org:443/pacer-platform/pacer_index_api:latest <br/>
-From Chome browser, go to "http://localhost:8086/pacer-index-api/1.0.0/" And, use manage-api-controller to add
-the following entry. Use POST option. Username and Password are specified in "env_packer_index_api" file. 
-Please replace xxx with username/password that will be provided from PACER-server.
+We need to populate the PACER index information for this app. From Chome browser, go to "http://localhost:8086/pacer-index-api/1.0.0/" And, use manage-api-controller to add the following entry. Use POST option. Username and Password are specified in "<component_name>.xml" files. 
 
 ```
  {
@@ -71,26 +46,14 @@ Please replace xxx with username/password that will be provided from PACER-serve
       "serverUrl":"http://musctest.hdap.gatech.edu:8082/JobManagementSystem/List",
       "security":{
          "type":"basic",
-         "username":"xxx",
-         "password":"xxx"
+         "username":"<username of list manager in Hous>",
+         "password":"<password>"
       },
       "version":"1.0.0",
       "type":"ECR"
    }
 }
 ```
-
-### elr_receiver deployment
-1. docker pull artifactory.icl.gtri.org/pacer-platform/elr_receiver
-2. docker run --name elr_receiver -p 8087:8888 --env-file env_elr_receiver --network pacer -d elr_receiver:latest
-
-### ecr-manager deployment
-1. Open "env_ecr_manager" file and put your windows server VM host name (or IP) in [your win server host] part.
-2. docker pull artifactory.icl.gtri.org/pacer-platform/ecr_manager
-3. docker run --name ecr_manager -p 8085:8080 --env-file env_ecr_manager --network pacer -d ecr_manager:latest
-
-Now run "docker ps" to see if all three components are running. Go to pgAdmin 4 and check tables under "ecr" schema.
-You should see "ecr_data" and "ecr_job" tables.
 
 ## End-to-end testing:
 Run the follows to make the PACER-client to talk to PACER-server in the GTRI sandbox.
