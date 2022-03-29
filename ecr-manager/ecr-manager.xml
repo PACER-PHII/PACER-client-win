@@ -1,0 +1,16 @@
+<service>
+  <id>ecrmanager</id>
+  <name>ECR Manager</name>
+  <description>This manages ECR data from lab report and EHR data</description>
+  <env name="JAVA_HOME" value="C:\Program Files\Microsoft\jdk-17.0.2.8-hotspot\"/>
+  <env name="JDBC_DRIVER" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+  <env name="JDBC_URL" value="jdbc:sqlserver://dalek4.icl.gtri.org:1433;databaseName=ecr;integratedSecurity=true"/>
+  <env name="LOCAL_BULKDATA_PATH" value="C:\workspace\PACER-client-win\ecr-manager\bulkdata"/>
+  <env name="LOCAL_PACER_SECURITY" value="Basic username:password"/>
+  <env name="LOCAL_PACER_URL" value="http://musctest.hdap.gatech.edu:8082/JobManagementSystem/List"/>
+  <env name="PACER_INDEX_SERVICE" value="http://localhost:8086/pacer-index-api/1.0.0/search"/>
+  <env name="SERVER_PORT" value="8085"/>
+  <executable>java</executable>
+  <arguments>-jar "%BASE%\ecr-manager-0.0.3.jar"</arguments>
+  <log mode="roll"></log>
+</service>

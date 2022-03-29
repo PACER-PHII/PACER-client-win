@@ -1,0 +1,12 @@
+<service>
+  <id>pacerindexapi</id>
+  <name>PACER Index API</name>
+  <description>This provides indexing server for PACER server</description>
+  <env name="JAVA_HOME" value="C:\Program Files\Microsoft\jdk-17.0.2.8-hotspot\"/>
+  <env name="BASIC_AUTH_USER" value="user"/>
+  <env name="BASIC_AUTH_PASSWORD" value="password"/>
+  <env name="SERVER_PORT" value="8086"/>
+  <executable>java</executable>
+  <arguments>-jar "%BASE%\pacer-index-api.jar"</arguments>
+  <log mode="roll"></log>
+</service>

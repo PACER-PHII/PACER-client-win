@@ -1,0 +1,12 @@
+<service>
+  <id>elrreceiver</id>
+  <name>ELR Receiver</name>
+  <description>This provides HL7 v2 messaging link layer interface</description>
+  <env name="JAVA_HOME" value="C:\Program Files\Microsoft\jdk-17.0.2.8-hotspot\"/>
+  <env name="ECR_URL" value="http://localhost:8085/ecr-manager/ECR"/>
+  <env name="TRANSPORT_MODE" value="MLLP"/>
+  <env name="PARSER_MODE" value="ECR"/>
+  <executable>java</executable>
+  <arguments>-jar "%BASE%\elr_receiver.jar"</arguments>
+  <log mode="roll"></log>
+</service>
