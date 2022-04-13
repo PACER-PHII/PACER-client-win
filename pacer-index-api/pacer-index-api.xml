@@ -6,6 +6,7 @@
   <env name="BASIC_AUTH_USER" value="user"/>
   <env name="BASIC_AUTH_PASSWORD" value="password"/>
   <env name="SERVER_PORT" value="8086"/>
+  <env name="DB_PATH" value="%BASE%\PIDB.db"/>
   <executable>java</executable>
   <arguments>-jar "%BASE%\pacer-index-api.jar"</arguments>
   <log mode="roll"></log>
