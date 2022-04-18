@@ -60,8 +60,9 @@ Change the entries for each provider and PACER server.
 ## End-to-end testing:
 Run the follows to make the PACER-client to talk to PACER-server in the GTRI sandbox.
 
-1. .\env_config.bat
-2. java -jar elr_sender-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+```
+>> java -jar elr_sender-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+```
 
 You should see the following message.
 
@@ -72,6 +73,43 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 Received response:
 MSA|AA|20070701132554000008le|20220224110058.233-0500||ACK^R01^ACK|1|P|2.5.1
 End of response message
+```
+### ELR Message
+ELR testing message is provided with the following filename,
+```
+hl7v2msg_fhirpatient.txt
+```
+This file contains a testing lab file in HL7v2.5.1 format with message type = ORU^R01.
+You can create your own HL7v2 message. However, it must be in v.2.5.1 and type should ORU^R01 (please see the below v2 message header for an example). 
+```
+MSH|^~\&| GT^1234^CLIA|Reliable^1234^CLIA|ELR^2.16.840.1.113883.19.3.2.3^ISO|SPH^2.16.840.1.113883.19.3.2^ISO|20070701132554-0400||ORU^R01^ORU_R01|20070701132554000008|P^T|2.5.1|||NE|NE|USA||||USELR1.0^^2.16.840.1.113883.19.9.7^ISO
+```
+There must be two additional pieces of information required in order for PACER-client to successfully trigger a request to PACER-server. They are
+* provider information (in PID segment)
+* patient identifier (in ORC segment)
+
+The provider information (may be more than one provider) should be provided in advance along with PACER-server endpoint so that proper PACER indexing information can be entered at the PACER index api service. Patient identifier should be the one that can be used for queries for EHR data. The formation of patient identifier should be in system and value pair. System should tell the coding system, which includes the value.
+
+The example of HL7v2.5.1 is shown as below.
+```
+MSH|^~\&| GT^1234^CLIA|Reliable^1234^CLIA|ELR^2.16.840.1.113883.19.3.2.3^ISO|SPH^2.16.840.1.113883.19.3.2^ISO|20070701132554-0400||ORU^R01^ORU_R01|20070701132554000008|P^T|2.5.1|||NE|NE|USA||||USELR1.0^^2.16.840.1.113883.19.9.7^ISO
+SFT|1|Level Seven Healthcare Software, Inc.^L^^^^&2.16.840.1.113883.19.4.6^ISO^XX^^^1234|1.2|An Lab System|56734||20080817
+PID|1||82713^^^FHIR&http://hl7.org/fhir&HL7^urn:hssc:musc:patientid^A&2.16.840.1.113883.19.3.2.1&ISO~777333333^^^&2.16.840.1.113883.4.1^SS^ISO||RODRICK^HEMAUER^^^^^L^^^^^^^BS|Mum^Martha^M^^^^M|19750602|M||2106-3^White^CDCREC^^^^04/24/2007|2222 Home Street^^Ann Arbor^MI^99999^USA^H||^PRN^PH^^1^555^5552004|^WPN^PH^^1^955^5551009|eng^English^ISO6392^^^^3/29/2007|M^Married^HL70002^^^^2.5.1||||||N^Not Hispanic or Latino^HL70189^^^^2.5.1||||||||N|||200808151000-0700|Reliable^2.16.840.1.113883.19.3.1^ISO
+ORC|RE|1205001883|12001805860^LAB||||||20050430000000|||P49430^ATKINSON^D|CR
+OBR|2|1205001883|12001805860^LAB|164200^C. trachomatis - PCA^L||20050429170100
+OBX|1|ST|164200^C. trachomatis - PCA^L||Positive||Negative|A||F||200505031532
+NTE|1|L|Performed At: DA|CR
+NTE|2|L|LabCorp Dallas|CR
+NTE|3|L|7777 Forest Lane Suite 350C|CR
+NTE|4|L|Dallas, TX 752300000|CR
+ORC|RE|1205001883|12001805860^LAB||||||20050430000000|||P49430^Duke^John|CR
+OBR|3|1205001883|12001805860^LAB|164205^N gonorrhoeae Competition Rflx^L||20050429170100
+OBX|1|ST|164205^N gonorrhoeae Competition Rflx^L||Negative||Negative|||F||20050429170100
+OBX|2|ST|164212^N gonorrhoeae DNA Probe w/Rflx^L||See Reflex||Negative|||F||20050429170100
+NTE|1|L|Performed At: DA|CR
+NTE|2|L|LabCorp Dallas|CR
+NTE|3|L|7777 Forest Lane Suite 350C|CR
+NTE|4|L|Dallas, TX 752300000|CR
 ```
 
 # PACER-client Update
