@@ -97,13 +97,25 @@ PACER data. LOCAL_* environment varialbles are mostly place holders. Even though
 please set it to correct value. LOCAL_BULKDATA_PATH needs to be pointing to existing folders. If not, 
 path not available error message will be shown until the folder is creaed.
 
-After configuring the XML file, save and run the following command,
+After configuring the XML file, save it and run the following command,
 
 ```
 >> .\ecr-manager.exe install
 ```
 
-This will install the ecr-manager as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the ECR Manager service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. Please note that this account should have a permission to access the MS SQL server.
+This will install the ecr-manager as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the ECR Manager service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. Please note that this account should have a permission to access (read and write) the MS SQL server.
+
+### ELR-RECEIVER
+Move to elr-receiver/ folder and update elr-receiver.xml file. ECR_URL is the environment variable that may need to be updated. However, if default values are used for ECR-MANAGER installation, and ECR-MANAGER and ELR-RECEIVER are running in the same machine, the same configuraion may be kepted the same.
+
+After the configuring the XML file, save it and run the follwoing comman,
+
+```
+>> .\elr-receiver.exe install
+```
+
+This will install the elr-receiver as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the ECR Manager service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. Please note that this account should have a permission to access to local hard disk. ELR-RECEIVER needs to have read and write permission to the hard disk so that a queue file can be created and managed.
+
 
 ## End-to-end testing:
 Run the follows to make the PACER-client to talk to PACER-server in the GTRI sandbox.
