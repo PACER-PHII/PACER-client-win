@@ -39,7 +39,11 @@ The applications must be deployed or started in the following order
    - ecr-manager
    - elr-receiver
 
-In each foler, there is an xml file. Open the XML file and make necessary changes for the environment variables. After all the environment variables are set correctly, run the executable (exe) file. Details for each application are provided below.
+In each foler, there is an xml file. Open the XML file and make necessary changes for the environment variables. After all the environment variables are set correctly, run the executable (exe) file. This will create a service for the application. The account information should be correctly entered as well.
+
+> NOTE: If any user access level is changed (for example, adding permission to the account used by PACER-client applications), then service(s) MUST be restarted so that the new changes to the account can be affective. 
+
+Detail application installation instructions for each application are provided below.
 
 ### PACER-INDEX-API
 At Powershell (in Admin mode), go to pacer-index-api/ folder. And open pacer-index-api.xml file. Then, check the environment variables and change them as needed. JAVA_HOME should work as is if the same version of JDK in this README is used. If you are running this in the environment that security needs to be tightened, please change BASIC Auth parameters. SERVER_PORT can also be changed. Please note these variables as these will be used in another application. When everything is done, please run the followin command at the Powershell.
