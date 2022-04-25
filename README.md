@@ -47,12 +47,10 @@ At Powershell (in Admin mode), go to pacer-index-api/ folder. And open pacer-ind
 ```
 >> .\pacer-index-api.exe install
 ```
-This will install the pacer-index-api as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the PACER Index API service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. Please note that this account should have a permission to access local harddrive, otherwise the application could have an issues.
+This will install the pacer-index-api as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the PACER Index API service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. Please note that this account should have a permission to access local harddrive, otherwise the application will have an issue writing data to PIDB.db file.
 
-Repeat the above for ecr-manager and elr-receiver. 'Log On' is critical for the ecr-manager because the ecr-manager will use this account to talk to MS SQL server in the windows authentication mode.
-
-### pacer-index-api service deployment
-In order for ecr-manager to talk to PACER-server, we need to populate the pacer-index-api with PACER-server information. From a Chome browser, go to "http://localhost:8086/pacer-index-api/1.0.0/" And, use the 'manage-api-controller' option to add the following entry. Use POST option. 
+#### pacer-index-api service configuration
+pacer-index.api is used by ecr-manager. In order for ecr-manager to talk to PACER-server, we need to populate the pacer-index-api with PACER-server information. From a Chome browser, go to "http://localhost:8086/pacer-index-api/1.0.0/" And, use the 'manage-api-controller' option to add the following entry. Use POST option. 
 
 ```
  {
@@ -60,7 +58,7 @@ In order for ecr-manager to talk to PACER-server, we need to populate the pacer-
    "identifier":"ORDPROVIDER|P49430",
    "pacerSource":{
       "name":"PACER test",
-      "serverUrl":"http://musctest.hdap.gatech.edu:8082/JobManagementSystem/List",
+      "serverUrl":"https://musctest.hdap.gatech.edu/JobManagementSystem/List",
       "security":{
          "type":"basic",
          "username":"<username of list manager in the PACER server>",
@@ -71,7 +69,41 @@ In order for ecr-manager to talk to PACER-server, we need to populate the pacer-
    }
 }
 ```
-Change the entries for each provider and PACER server.
+Change the entry for each provider and PACER server. You can create one per provider. 
+
+### ECR-MANAGER
+Now, move to ecr-manager/ folder. Open ecr-manager.xml file. Example xml file is shown below.
+```
+<service>
+  <id>ecrmanager</id>
+  <name>ECR Manager</name>
+  <description>This manages ECR data from lab report and EHR data</description>
+  <env name="JAVA_HOME" value="C:\Program Files\Microsoft\jdk-17.0.2.8-hotspot\"/>
+  <env name="JDBC_DRIVER" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+  <env name="JDBC_URL" value="jdbc:sqlserver://<host>:1433;databaseName=ecr;integratedSecurity=true"/>
+  <env name="LOCAL_BULKDATA_PATH" value="C:\workspace\PACER-client-win\ecr-manager\bulkdata"/>
+  <env name="LOCAL_PACER_SECURITY" value="Basic username:password"/>
+  <env name="LOCAL_PACER_URL" value="http://musctest.hdap.gatech.edu:8082/JobManagementSystem/List"/>
+  <env name="PACER_INDEX_SERVICE" value="http://localhost:8086/pacer-index-api/1.0.0/search"/>
+  <env name="TRUST_CERT" value="true"/>
+  <env name="SERVER_PORT" value="8085"/>
+  <executable>java</executable>
+  <arguments>-jar "%BASE%\ecr-manager-0.0.3.jar"</arguments>
+  <log mode="roll"></log>
+</service>
+``` 
+In the ecr-manager.xml, JDBC_URL must be set to the MS-SQL database where you will be storing the
+PACER data. LOCAL_* environment varialbles are mostly place holders. Even though it will not be used,
+please set it to correct value. LOCAL_BULKDATA_PATH needs to be pointing to existing folders. If not, 
+path not available error message will be shown until the folder is creaed.
+
+After configuring the XML file, save and run the following command,
+
+```
+>> .\ecr-manager.exe install
+```
+
+This will install the ecr-manager as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the ECR Manager service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. Please note that this account should have a permission to access the MS SQL server.
 
 ## End-to-end testing:
 Run the follows to make the PACER-client to talk to PACER-server in the GTRI sandbox.
