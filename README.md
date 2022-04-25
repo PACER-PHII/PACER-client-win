@@ -11,7 +11,8 @@ PACER-client uses a wrapper to run the Java application as a window service. Win
 ### OpenJDK installation.
 Java is required to run this service. Thus, either JRE or JDK needs to be installed. Go to https://docs.microsoft.com/en-us/java/openjdk/download and download OpenJDK17 msi file (microsoft-jdk-17.0.2.8.1-windows-x64.msi) to install OpenJDK. After installation, type "java --version" at the command line (or powershell) to verify its installation
 
-After installation, download the following dll file.
+#### Authorization library installation.
+After installation, authorization library must be downloaded and installed in JDK bin folder. download the following dll file.
 
 ```
 mssql-jdbc_auth-10.2.0.x64.dll
@@ -38,12 +39,15 @@ The applications must be deployed or started in the following order
    - ecr-manager
    - elr-receiver
 
-In each foler, there is an xml file. Open the XML file and make necessary changes for the environment variables. After all the environment variables are set correctly, run the executable (exe) file. See below for pacer-index-api.exe as an example,
+In each foler, there is an xml file. Open the XML file and make necessary changes for the environment variables. After all the environment variables are set correctly, run the executable (exe) file. Details for each application are provided below.
+
+### PACER-INDEX-API
+At Powershell (in Admin mode), go to pacer-index-api/ folder. And open pacer-index-api.xml file. Then, check the environment variables and change them as needed. JAVA_HOME should work as is if the same version of JDK in this README is used. If you are running this in the environment that security needs to be tightened, please change BASIC Auth parameters. SERVER_PORT can also be changed. Please note these variables as these will be used in another application. When everything is done, please run the followin command at the Powershell.
 
 ```
 >> .\pacer-index-api.exe install
 ```
-This will install the pacer-index-api as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the PACER Index API service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password.
+This will install the pacer-index-api as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the PACER Index API service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. Please note that this account should have a permission to access local harddrive, otherwise the application could have an issues.
 
 Repeat the above for ecr-manager and elr-receiver. 'Log On' is critical for the ecr-manager because the ecr-manager will use this account to talk to MS SQL server in the windows authentication mode.
 
