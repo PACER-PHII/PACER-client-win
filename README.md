@@ -9,7 +9,19 @@ Contact:<br/>
 PACER-client uses a wrapper to run the Java application as a window service. Windows Service Wrapper (WinSW) is used for the wrapper.exe. All PACER-client components in this repository already have this wrapper application. Thus, nothing needs to be done for this wrapper. If you want to learn about the WinSW, please refer to https://github.com/winsw/winsw
 
 ### OpenJDK installation.
-Java is required to run this service. Thus, either JRE or JDK needs to be installed. Go to https://docs.microsoft.com/en-us/java/openjdk/download and download OpenJDK17 msi file to install OpenJDK. After installation, type "java --version" at the command line (or powershell) to verify its installation
+Java is required to run this service. Thus, either JRE or JDK needs to be installed. Go to https://docs.microsoft.com/en-us/java/openjdk/download and download OpenJDK17 msi file (microsoft-jdk-17.0.2.8.1-windows-x64.msi) to install OpenJDK. After installation, type "java --version" at the command line (or powershell) to verify its installation
+
+After installation, download the following dll file.
+
+```
+mssql-jdbc_auth-10.2.0.x64.dll
+```
+
+from https://docs.microsoft.com/en-us/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver15
+
+zip or tar.gz file is available from the link above. Once uncompressed, go to auth/ folder. and choose the one meets your VM configuration. 
+
+Then, copy the file, mssql-jdbc_auth-10.2.0.x64.dll, to JDK's bin folder. If installation msi file is used for the Java installation, then the JDK bin folder should be **C:\Program Files\Microsoft\jdk-17.0.2.8-hotspot\bin**.
 
 ### MS Sql Server Database.
 Any relational database can be used. If you prefer another database such as PostgreSQL, refer to https://www.postgresql.org/download/windows/ and download the installer to install PostgreSQL database. 
