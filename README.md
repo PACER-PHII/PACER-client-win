@@ -124,7 +124,7 @@ After configuring the XML file, save it and run the following command,
 This will install the ecr-manager as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the ECR Manager service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. Please note that this account should have a permission to access (read and write) the MS SQL server.
 
 ### ELR-RECEIVER
-Move to elr-receiver/ folder and update elr-receiver.xml file. ECR_URL is the environment variable that may need to be updated. However, if default values are used for ECR-MANAGER installation, and ECR-MANAGER and ELR-RECEIVER are running in the same machine, the same configuraion may be kepted the same.
+Move to elr-receiver/ folder and update elr-receiver.xml file. ECR_URL is the environment variable that may need to be updated. However, if default values are used for ECR-MANAGER installation, and ECR-MANAGER and ELR-RECEIVER are running in the same machine, then the same configuraion may be used without modifications.
 
 After the configuring the XML file, save it and run the follwoing comman,
 
