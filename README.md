@@ -31,6 +31,20 @@ ECR Manager needs to have a database to persist ECR data from electronic lab rep
 
 In order to use Windows Authentication for MS SQL, make sure "ecr" database is owned by the account that will run PACER-client or the account has a db writer/reader permission. Please note that the schema name also needs to be "ecr"
 
+## CERTIFICATE FOR SSL
+All the traffic from client to external need to be on the secure socker layer. SSL transaction requires a publically signed certificate. This needs to be done by server side. However, if client network (or client firewall) manipulates the incoming certificate(s) and modify the chain of trust, then the PACER client applications won't be able to successfully establish the secure connections because the applications cannot validate the modified certificate(s).
+
+In this case, the certificate must be trusted and added to the keystore. Here is the proecure to trust the certificate in the trust store in Java.
+1. Export the server's certificate to file. This can be done by copying the PACER server's endpoint URL to Browser's address bar. Then, click on the lock icon to export the certificate to file.
+2. Copy the exported certified file to C:\Program Files\Microsoft\jdk-17.0.2.8-hotspot\lib\security folder.
+3. Open Powershell, and go to C:\Program Files\Microsoft\jdk-17.0.2.8-hotspot\lib\security
+4. Run this command,
+```
+keytool -import -alias <alias_name> -file <exported cert filename> -keystore cacerts
+```
+5. If you are asked for a password but haven't set it before, then the default password is "changeit". In production environment, you need to change this password.
+6. Certificate will be added to the trust store.
+
 ## PACER-client deployment
 There are three folders in the PACER-client-win repository. It is recommeded to create a separate folder to copy the following three folders. In this way, when updates are made, the original folder can keep the updated version. And, copied version can be modified for the local environment. 
 
