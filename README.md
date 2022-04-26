@@ -124,19 +124,19 @@ After configuring the XML file, save it and run the following command,
 This will install the ecr-manager as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the ECR Manager service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. Please note that this account should have a permission to access (read and write) the MS SQL server.
 
 ### ELR-RECEIVER
-Move to elr-receiver/ folder and update elr-receiver.xml file. ECR_URL is the environment variable that may need to be updated. However, if default values are used for ECR-MANAGER installation, and ECR-MANAGER and ELR-RECEIVER are running in the same machine, then the same configuraion may be used without modifications.
+Go to elr-receiver/ folder and update elr-receiver.xml file. ECR_URL in the elr-receiver.xml is an environment variable that may need to be updated. However, if default values are used for ECR-MANAGER installation, and ECR-MANAGER and ELR-RECEIVER are running in the same machine, then the same configuraion may be used without modifications.
 
-After the configuring the XML file, save it and run the follwoing comman,
+After the configuring the XML file, save it and run the follwoing command from the Powershell,
 
 ```
 >> .\elr-receiver.exe install
 ```
 
-This will install the elr-receiver as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the ECR Manager service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. Please note that this account should have a permission to access to local hard disk. ELR-RECEIVER needs to have read and write permission to the hard disk so that a queue file can be created and managed.
+This will install the elr-receiver as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the ELR Receiver service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. Please note that this account should have a permission to access the local hard disk. ELR-RECEIVER needs to have read and write permission to the hard disk so that a queue file can be created and managed.
 
 
 ## End-to-end testing:
-Run the follows to make the PACER-client to talk to PACER-server in the GTRI sandbox.
+From the Powershell, go to the root directory of downloaded PACER-client-win. Then, at the prompt, run the following command to make the PACER-client to talk to PACER-server in the GTRI sandbox.
 
 ```
 >> java -jar elr_sender-0.0.1-SNAPSHOT-jar-with-dependencies.jar
@@ -153,12 +153,12 @@ MSA|AA|20070701132554000008le|20220224110058.233-0500||ACK^R01^ACK|1|P|2.5.1
 End of response message
 ```
 ### ELR Message
-ELR testing message is provided with the following filename,
+The ELR message that was used for testing is provided in the PACER-client-win repo package (see below for the file name).
 ```
 hl7v2msg_fhirpatient.txt
 ```
 This file contains a testing lab file in HL7v2.5.1 format with message type = ORU^R01.
-You can create your own HL7v2 message. However, it must be in v.2.5.1 and type should ORU^R01 (please see the below v2 message header for an example). 
+You can create your own HL7v2 message. However, it must be in v.2.5.1, and its type should be ORU^R01 (please see the v2 message header below). 
 ```
 MSH|^~\&| GT^1234^CLIA|Reliable^1234^CLIA|ELR^2.16.840.1.113883.19.3.2.3^ISO|SPH^2.16.840.1.113883.19.3.2^ISO|20070701132554-0400||ORU^R01^ORU_R01|20070701132554000008|P^T|2.5.1|||NE|NE|USA||||USELR1.0^^2.16.840.1.113883.19.9.7^ISO
 ```
@@ -166,7 +166,9 @@ There must be two additional pieces of information required in order for PACER-c
 * provider information (in PID segment)
 * patient identifier (in ORC segment)
 
-The provider information (may be more than one provider) should be provided in advance along with PACER-server endpoint so that proper PACER indexing information can be entered at the PACER index api service. Patient identifier should be the one that can be used for queries for EHR data. The formation of patient identifier should be in system and value pair. System should tell the coding system, which includes the value.
+The provider information (may be more than one provider) should be provided in advance along with PACER-server endpoint so that proper PACER indexing information can be entered at the PACER index api service. 
+
+The patient identifier should be the one that can be used for the EHR data query. This means that the patient identifier should be searchable by EHR FHIR.
 
 The example of HL7v2.5.1 is shown as below.
 ```
@@ -191,6 +193,6 @@ NTE|4|L|Dallas, TX 752300000|CR
 ```
 
 # PACER-client Update
-This repository will be the place where updates are made. You can do git pull to update the PACER-client. As recommended, if a separate folder was used for the actual installation, then new updated files from the git pull will not replace the XML configuration files that were modified for the local environment. 
+This repository will be the place where updates are made. You can do git pull to update the PACER-client. As recommended, if a separate folder was used for the actual deployment, then new updated files from the git pull will not replace the XML configuration files that were modified for the local environment. 
 
-New updated jar file(s) can be run by restarting the service from 'services'. Do not copy the XML file over to the folder that will be used for the actual deployment. This can overwrite the current settings.
+New updated jar file(s) can be run by restarting the service from 'services'. While updating the PACER-clinet, please be careful that your current settings (XML files) are not overwritten. 
