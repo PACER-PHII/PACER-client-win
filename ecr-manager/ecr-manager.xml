@@ -9,9 +9,10 @@
   <env name="LOCAL_PACER_SECURITY" value="Basic username:password"/>
   <env name="LOCAL_PACER_URL" value="http://musctest.hdap.gatech.edu:8082/JobManagementSystem/List"/>
   <env name="PACER_INDEX_SERVICE" value="http://localhost:8086/pacer-index-api/1.0.0/search"/>
-  <env name="TRUST_CERT" value="true"/>
+  <env name="TRUST_CERT" value="false"/>
   <env name="SERVER_PORT" value="8085"/>
+  <env name="LOG_LEVEL" value="DEBUG"/>
   <executable>java</executable>
-  <arguments>-jar "%BASE%\ecr-manager-0.0.3.jar"</arguments>
+  <arguments>-jar "%BASE%\ecr-manager.jar"</arguments>
   <log mode="roll"></log>
 </service>
