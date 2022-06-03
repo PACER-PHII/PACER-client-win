@@ -11,7 +11,7 @@
   <env name="PACER_INDEX_SERVICE" value="http://localhost:8086/pacer-index-api/1.0.0/search"/>
   <env name="TRUST_CERT" value="false"/>
   <env name="SERVER_PORT" value="8085"/>
-  <env name="LOG_LEVEL" value="DEBUG"/>
+  <env name="LOG_LEVEL" value="INFO"/>
   <executable>java</executable>
   <arguments>-jar "%BASE%\ecr-manager.jar"</arguments>
   <log mode="roll"></log>
