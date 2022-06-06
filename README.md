@@ -139,7 +139,7 @@ This will install the elr-receiver as a service. After the installation, open 's
 From the Powershell, go to the root directory of downloaded PACER-client-win. Then, at the prompt, run the following command to make the PACER-client to talk to PACER-server in the GTRI sandbox.
 
 ```
->> java -jar elr_sender-0.0.2-SNAPSHOT-jar-with-dependencies.jar
+>> java -jar elr_sender-0.0.2-jar-with-dependencies.jar
 ```
 
 You should see the following message.
