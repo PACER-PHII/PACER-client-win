@@ -193,6 +193,9 @@ NTE|4|L|Dallas, TX 752300000|CR
 ```
 
 # PACER-client Update
-This repository will be the place where updates are made. You can do git pull to update the PACER-client. As recommended, if a separate folder was used for the actual deployment, then new updated files from the git pull will not replace the XML configuration files that were modified for the local environment. 
+After the PACER-client installation, any updates on the components can be made individually. In most minor updates, \*.xml and \*.jar files will be involved. Please follow the instruction below to update the components.
 
-New updated jar file(s) can be run by restarting the service from 'services'. While updating the PACER-clinet, please be careful that your current settings (XML files) are not overwritten. 
+1. Check \*.xml file for any new environment variables. If there are any new variables introcuded, add those lines to the existing \*.xml file.
+2. Download updated \*.jar file from the component directory and overwrite the existing one.
+3. Go to services application to restart the updated service(s)
+4. Check the \*.log file to verify successful launch. Also check the \*.err.log file for any errors.
