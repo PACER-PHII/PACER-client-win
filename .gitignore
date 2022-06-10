@@ -29,3 +29,4 @@ hs_err_pid*
 id_file
 
 PIDB.db
+pacer-index-api/PIDB.db
