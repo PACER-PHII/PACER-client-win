@@ -195,7 +195,8 @@ NTE|4|L|Dallas, TX 752300000|CR
 # PACER-client Update
 After the PACER-client installation, any updates on the components can be made individually. In most minor updates, \*.xml and \*.jar files will be involved. Please follow the instruction below to update the components.
 
-1. Check \*.xml file for any new environment variables. If there are any new variables introcuded, add those lines to the existing \*.xml file.
-2. Download updated \*.jar file from the component directory and overwrite the existing one.
-3. Go to services application to restart the updated service(s)
-4. Check the \*.log file to verify successful launch. Also check the \*.err.log file for any errors.
+1. Stop all services (elr_receiver, ecr_manager, pacer_index-api)
+2. Check \*.xml file in each component folder if there are any new environment variables. If there are any new variables introcuded, add those lines to the existing \*.xml file.
+3. Download updated \*.jar file from the component directory and overwrite the existing one.
+4. Go to services application to restart the updated service(s)
+5. Check the \*.log file to verify successful launch. Also check the \*.err.log file for any errors.
