@@ -134,6 +134,10 @@ After the configuring the XML file, save it and run the follwoing command from t
 
 This will install the elr-receiver as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the ELR Receiver service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. Please note that this account should have a permission to access the local hard disk. ELR-RECEIVER needs to have read and write permission to the hard disk so that a queue file can be created and managed.
 
+### PACER-UI
+This is a user dashboard that shows the case reports in PACER. 
+
+
 
 ## End-to-end testing:
 From the Powershell, go to the root directory of downloaded PACER-client-win. Then, at the prompt, run the following command to make the PACER-client to talk to PACER-server in the GTRI sandbox.
