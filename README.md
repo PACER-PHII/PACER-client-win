@@ -141,9 +141,10 @@ If you just want to deploy the dashboard, please follow the instruction below.
 
 1. In the Server Manager, Enable IIS. You may also need to configure user so that the IIS server can access the folder
 2. Download the zip file from the release tag (https://github.com/gt-health/PACER-client-win/releases)
-3. unzip the downloaded file and 
-4. cd to the cloned folder and run "ng build"
+3. unzip the downloaded file and copy the folder named, "pacer-ui" to the place where you want to run your IIS server on.
+4. Add a new application in the IIS setup and name the alias as "pacer-ui" and set the path to the "pacer-ui" folder that you created in the step 3.
 
+Use the web browser and go to http://localhost/pacer-ui 
 
 ## End-to-end testing:
 From the Powershell, go to the root directory of downloaded PACER-client-win. Then, at the prompt, run the following command to make the PACER-client to talk to PACER-server in the GTRI sandbox.
