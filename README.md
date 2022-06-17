@@ -135,8 +135,14 @@ After the configuring the XML file, save it and run the follwoing command from t
 This will install the elr-receiver as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the ELR Receiver service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. Please note that this account should have a permission to access the local hard disk. ELR-RECEIVER needs to have read and write permission to the hard disk so that a queue file can be created and managed.
 
 ### PACER-UI
-This is a user dashboard that shows the case reports in PACER. 
+This is a user dashboard that shows the case reports in PACER. The dashboard is written in Angular, and the source codes are available in https://github.com/gt-health/pacer-ui/ if you are interested in and willing to contribute in the development. 
 
+If you just want to deploy the dashboard, please follow the instruction below.
+
+1. In the Server Manager, Enable IIS. You may also need to configure user so that the IIS server can access the folder
+2. Download the zip file from the release tag (https://github.com/gt-health/PACER-client-win/releases)
+3. unzip the downloaded file and 
+4. cd to the cloned folder and run "ng build"
 
 
 ## End-to-end testing:
