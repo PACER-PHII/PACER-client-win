@@ -123,6 +123,16 @@ After configuring the XML file, save it and run the following command,
 
 This will install the ecr-manager as a service. After the installation, open 'services' application (built-in app in Windows). From the list of services, locate the ECR Manager service. Right click on it and choose Properties. There, go to 'Log On' tab and choose 'this account' option. Then, add username and password. Please note that this account should have a permission to access (read and write) the MS SQL server.
 
+<b>Exporting cases in CSV file</b>
+
+ECR-Manager has an API that will dump entire cases in csv file. The endpoint is 
+```
+http(s)://<yourhost>/ecr-manager/exportCSV
+```
+
+If you run it from the browser, it will save the file in the download folder with name = csv_\[datetime].csv. 
+   
+
 ### ELR-RECEIVER
 Go to elr-receiver/ folder and update elr-receiver.xml file. ECR_URL in the elr-receiver.xml is an environment variable that may need to be updated. However, if default values are used for ECR-MANAGER installation, and ECR-MANAGER and ELR-RECEIVER are running in the same machine, then the same configuraion may be used without modifications.
 
