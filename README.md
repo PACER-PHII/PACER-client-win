@@ -161,6 +161,9 @@ If you just want to deploy the dashboard, please follow the instruction below.
 
 Use the web browser and go to http://localhost/pacer-ui 
 
+If you want to have authentication on the UI, please follow the instruction at https://learn.microsoft.com/en-us/iis/configuration/system.webserver/security/authentication/windowsauthentication/
+
+
 ## End-to-end testing:
 From the Powershell, go to the root directory of downloaded PACER-client-win. Then, at the prompt, run the following command to make the PACER-client to talk to PACER-server in the GTRI sandbox.
 
