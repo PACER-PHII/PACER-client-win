@@ -157,7 +157,8 @@ If you just want to deploy the dashboard, please follow the instruction below.
 1. In the Server Manager, Enable IIS. You may also need to configure user so that the IIS server can access the folder
 2. Download the zip file from the release tag (https://github.com/gt-health/PACER-client-win/releases)
 3. unzip the downloaded file and copy the folder named, "pacer-ui" to the place where you want to run your IIS server on.
-4. Add a new application in the IIS setup and name the alias as "pacer-ui" and set the path to the "pacer-ui" folder that you created in the step 3.
+4. Locate `config.json` file located in /pacer-ui/config/config.json and edit the line  "api": "http://yellowisland01.icl.gtri.org:8085" to use your api. For example "api": "http://myapi.org:8080/".
+5. Add a new application in the IIS setup and name the alias as "pacer-ui" and set the path to the "pacer-ui" folder that you created in the step 3.
 
 Use the web browser and go to http://localhost/pacer-ui 
 
