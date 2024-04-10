@@ -1,0 +1,175 @@
+{
+  "Id": "417",
+  "Status": "A",
+  "StatusLog": null,
+  "Provider": [
+    {
+      "ID": {
+        "value": "CYBERLAB|City of Houston",
+        "type": "appfac"
+      },
+      "Name": "",
+      "Phone": "",
+      "Fax": "",
+      "Email": "",
+      "Facility": "",
+      "Address": "",
+      "Country": ""
+    },
+    {
+      "ID": {
+        "value": "000400054",
+        "type": "ORDPROVIDER"
+      },
+      "Name": "GARY BUCHANAN",
+      "Phone": "",
+      "Fax": "",
+      "Email": "",
+      "Facility": "",
+      "Address": "",
+      "Country": ""
+    }
+  ],
+  "Facility": {
+    "ID": "3003",
+    "Name": "",
+    "Phone": "",
+    "Address": "",
+    "Fax": "",
+    "Hospital_Unit": ""
+  },
+  "Patient": {
+    "ID": [
+      {
+        "value": "440179733",
+        "type": "COH"
+      }
+    ],
+    "Name": {
+      "given": "One",
+      "family": "Zzzpacer"
+    },
+    "Parents_Guardians": [],
+    "Street_Address": "1 PACER ST PORTLAND, OR 97201",
+    "Birth_Date": "Mon May 04 00:00:00 UTC 1992",
+    "Sex": "male",
+    "PatientClass": "",
+    "Race": {
+      "Code": "2106-3",
+      "System": "urn:oid:2.16.840.1.113883.6.238",
+      "Display": "White"
+    },
+    "Ethnicity": {
+      "Code": "2186-5",
+      "System": "urn:oid:2.16.840.1.113883.6.238",
+      "Display": "Not Hispanic or Latino"
+    },
+    "Preferred_Language": {
+      "Code": "en",
+      "System": "urn:ietf:bcp:47",
+      "Display": "English"
+    },
+    "Occupation": "",
+    "Pregnant": false,
+    "Travel_History": [],
+    "Insurance_Type": {
+      "Code": "",
+      "System": "",
+      "Display": ""
+    },
+    "Immunization_History": [
+      {
+        "Code": "TDAP",
+        "System": "http://hl7.org/fhir/sid/cvx",
+        "Date": "25-07-23"
+      }
+    ],
+    "Visit_DateTime": "",
+    "Admission_DateTime": "",
+    "Date_Of_Onset": "",
+    "Symptoms": [],
+    "Lab_Order_Code": [
+      {
+        "Code": "43304-5",
+        "System": "LN",
+        "Display": "C trach rRNA XXX Ql PCR Chlamydia trachomatis rRNA [Presence] in Unspecified specimen by Probe and target amplification method",
+        "Date": "",
+        "Laboratory_Results": [
+          {
+            "Code": "43304-5",
+            "System": "LN",
+            "Display": "C trach rRNA XXX Ql PCR Chlamydia trachomatis rRNA [Presence] in Unspecified specimen by Probe and target amplification method",
+            "Date": "Tue Jan 09 09:55:00 CST 2024",
+            "Value": "CWE[10828004^Positive (qualifier value)^SCT^^^^20120131^^POSITIVE for Chlamydia trachomatis (CT) rRNA.  ]",
+            "Unit": {
+              "Code": "",
+              "System": "",
+              "Display": ""
+            }
+          }
+        ],
+        "Facility": {
+          "ID": "3003",
+          "Name": "COH STD Sunnyside",
+          "Phone": "-832-3933900",
+          "Address": "Bureau of Laboratory Services, Houston TX 77030",
+          "Fax": "",
+          "Hospital_Unit": ""
+        },
+        "Provider": {
+          "ID": {
+            "value": "000400054",
+            "type": "ORDPROVIDER"
+          },
+          "Name": "GARY BUCHANAN",
+          "Phone": "",
+          "Fax": "",
+          "Email": "",
+          "Facility": "",
+          "Address": "",
+          "Country": ""
+        }
+      }
+    ],
+    "Placer_Order_Code": "",
+    "Diagnosis": [
+      {
+        "Code": "A56.3",
+        "System": "urn:oid:2.16.840.1.113883.6.90",
+        "Display": "Chlamydial infection of anus and rectum",
+        "Date": "Sat Apr 11 06:47:33 UTC 2020"
+      }
+    ],
+    "Medication Provided": [
+      {
+        "Code": "82122",
+        "System": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "Display": "",
+        "Dosage": {
+          "Value": "250",
+          "Unit": "mg"
+        },
+        "Date": "Fri Jun 24 00:00:00 UTC 2022",
+        "Frequency": ""
+      },
+      {
+        "Code": "2193",
+        "System": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "Display": "ceftriaxone 100 MG/ML Injectable Solution",
+        "Dosage": {
+          "Value": "500",
+          "Unit": "mg"
+        },
+        "Date": "Wed May 04 17:43:15 UTC 2022",
+        "Frequency": ""
+      }
+    ],
+    "Death_Date": "",
+    "Date_Discharged": "",
+    "Laboratory_Results": [],
+    "Trigger_Code": [],
+    "Lab_Tests_Performed": []
+  },
+  "Sending Application": "",
+  "Notes": []
+}
